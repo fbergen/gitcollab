@@ -24,12 +24,27 @@ RUN go build -mod=readonly -v -o server
 FROM debian:buster-slim
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     --no-install-recommends \
-    ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+    ca-certificates git wget gnupg
+
+    #&& \
+    #rm -rf /var/lib/apt/lists/*
+
+RUN wget https://raw.githubusercontent.com/saulpw/deb-vd/master/devotees.gpg.key
+RUN apt-key add devotees.gpg.key
+
+RUN apt install -y apt-transport-https software-properties-common
+
+RUN add-apt-repository \
+    "deb [arch=amd64] https://raw.githubusercontent.com/saulpw/deb-vd/master \
+    sid \
+    main"
+RUN apt-get update
+RUN apt-get install -y visidata
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /app/server /app/server
 COPY script.sh ./
+COPY cmdlog.vd ./
 
 # Run the web service on container startup.
 CMD ["/app/server"]

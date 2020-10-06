@@ -25,6 +25,7 @@ func main() {
 }
 
 func scriptHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
 	cmd.Stderr = os.Stderr
 	out, err := cmd.Output()

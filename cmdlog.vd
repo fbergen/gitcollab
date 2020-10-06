@@ -1,0 +1,8 @@
+sheet	col	row	longname	input	keystrokes	comment
+	override	header	set-option	0		
+			open-file	test.csv	o	
+test	0		key-col		!	
+test	1		key-col		!	
+test			freq-keys		gF	
+test_-_freq	1		freq-col		F	
+test_-_freq__freq	0		sort-desc		]	
