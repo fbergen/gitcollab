@@ -1,10 +1,11 @@
-set -e
+REPO_USR=$1
+REPO_NAME=$2
 
-rm -rf garden
-git clone -n https://github.com/garden-io/garden.git 
-cd garden
+git clone -n https://github.com/${REPO_USR}/${REPO_NAME}.git
+cd ${REPO_NAME}
 
-git log --date=short --pretty=format:"%ae,%cd" | rev | sed 's/-/,/1' | rev > test.csv
-vd test.csv --header=0 -p ../cmdlog.vd --batch --output=test.html
+git log --date=short --pretty=format:"%ae,%cd" | rev | sed 's/-/,/1' | rev > tmp.csv
+vd tmp.csv --header=0 -p ../cmdlog.vd --batch --output=test.csv
 
-cat test.html
+echo test.csv
+# cp test.csv ../commiters-${REPO_NAME}.csv

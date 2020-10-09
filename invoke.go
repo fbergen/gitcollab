@@ -25,8 +25,8 @@ func main() {
 }
 
 func scriptHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh")
+	// w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh", "garden-io", "garden")
 	cmd.Stderr = os.Stderr
 	out, err := cmd.Output()
 	if err != nil {
