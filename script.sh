@@ -7,5 +7,5 @@ cd ${REPO_NAME}
 git log --date=short --pretty=format:"%ae,%cd" | rev | sed 's/-/,/1' | rev > tmp.csv
 vd tmp.csv --header=0 -p ../cmdlog.vd --batch --output=test.csv
 
-echo test.csv
+cat test.csv
 # cp test.csv ../commiters-${REPO_NAME}.csv
