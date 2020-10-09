@@ -5,10 +5,11 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func main() {
-	http.HandleFunc("/", scriptHandler)
+	http.HandleFunc("/repo/", scriptHandler)
 
 	// Determine port for HTTP service.
 	port := os.Getenv("PORT")
@@ -25,8 +26,15 @@ func main() {
 }
 
 func scriptHandler(w http.ResponseWriter, r *http.Request) {
+	path := strings.Split(r.URL.Path, "/")
+	user := path[2]
+	repo := path[3]
+	log.Printf("PATH %s", path)
+	log.Printf("USER %s", user)
+	log.Printf("REPO %s", repo)
+
 	// w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh", "garden-io", "garden")
+	cmd := exec.CommandContext(r.Context(), "/bin/sh", "script.sh", user, repo)
 	cmd.Stderr = os.Stderr
 	out, err := cmd.Output()
 	if err != nil {
