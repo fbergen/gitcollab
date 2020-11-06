@@ -3,6 +3,7 @@
 
 ## Pull requests
 
+Starts a simple webserver displaying MAU who have interacted on a PR
 
 ### Run locally 
 
@@ -15,6 +16,8 @@ $ http://localhost:8080/repo/GitbookIO/gitbook
 
 
 ## Issues
+
+Dumps users active on Issues
 
 ### Run locally
 
