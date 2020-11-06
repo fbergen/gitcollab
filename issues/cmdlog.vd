@@ -1,0 +1,12 @@
+sheet	col	row	longname	input	keystrokes	comment
+	override	filetype	set-option	csv		
+	override	header	set-option	0		
+			open-file	-	o	
+-	0		key-col		!	
+-	1		key-col		!	
+-			freq-keys		gF	
+-_-_freq	0		freq-col		F	
+-_-_freq__freq	0		sort-desc		]	
+-_-_freq__freq	percent		hide-col		-	
+-_-_freq__freq	histogram		hide-col		-	
+-_-_freq__freq	0		rename-col	Month	^	
